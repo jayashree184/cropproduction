@@ -1,0 +1,37 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+%matplotlib inline
+import seaborn as sns
+
+crop=pd.read_csv("C:/Users/CSE WPT/Downloads/archive(14)/crop_production.csv")
+crop.head()
+
+crop.columns
+
+print(crop.shape)
+
+print(crop.size)
+
+crop.info()
+
+crop['Season'].unique()
+
+plt.figure(figsize = (6,6))
+segment = crop['Season'].value_counts()
+segment_label = crop['Season'].unique()
+color = ('LightPink', "LightBlue" , 'LightGreen','red','green','Gold')
+
+plt.pie(segment,autopct = '%1.1f%%',labels = segment_label,explode = (0.06,0.05,0.05,0.07,0.08,0.05),shadow = True,colors = color);
+
+sns.catplot(data=crop,x="Crop_Year",aspect=3,kind='count')
+
+crop.describe()
+
+corr=crop[['Area','Production']].corr()
+sns.heatmap(corr,annot = True , cmap = 'YlGnBu')
+
+sns.heatmap(crop.isnull(),yticklabels=False)
+
+crop.isnull().sum()
+
